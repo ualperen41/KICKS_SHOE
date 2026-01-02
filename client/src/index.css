@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Open Sans", sans-serif;
+  --font-rubik: "Rubik", "sans-serif";
+  --color-my-blue: #4a69e2;
+  --color-my-yellow: #ffa52f;
+  --color-grey: #e7e7e3;
+  --color-dark-grey: #232321;
+  --color-main-grey: #70706e;
+  --color-white: #ffffff;
+  --color-fa-white: #fafafa;
+}
+
+@layer base {
+  body {
+    @apply bg-grey text-dark-grey font-sans;
+  }
+
+  button {
+    @apply cursor-pointer transition-all duration-300;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
+@layer components {
+  .spacing {
+    @apply py-8 px-4 md:px-8 lg:px-12 xl:px-16;
+  }
+
+  .header-button {
+    @apply px-6 py-2 hover:bg-zinc-500/30 transition cursor-pointer whitespace-nowrap w-full;
+  }
+
+  .footer-button {
+    @apply bg-black p-4 rounded-lg;
+  }
+}
+
+@layer utilities {
+  /* Body text sizes */
+  .text-body-xs {
+    @apply text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px];
+  }
+
+  .text-body-sm {
+    @apply text-[15px] sm:text-[17px] md:text-[19px] lg:text-[21px] xl:text-[24px];
+  }
+
+  .text-body-base {
+    @apply text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px];
+  }
+
+  .text-body-lg {
+    @apply text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px];
+  }
+
+  /* Heading sizes */
+  .text-heading-xs {
+    @apply text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] xl:text-[36px];
+  }
+
+  .text-heading-sm {
+    @apply text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] xl:text-[40px];
+  }
+
+  .text-heading-base {
+    @apply text-[30px] sm:text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px];
+  }
+
+  .text-heading-lg {
+    @apply text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] xl:text-[84px];
+  }
+
+  .text-heading-xl {
+    @apply text-[42px] sm:text-[56px] md:text-[70px] lg:text-[84px] xl:text-[96px];
+  }
+}

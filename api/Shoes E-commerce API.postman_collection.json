@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "fe74d140-216a-4499-95ec-48ba3078c9e6",
+		"name": "Shoes E-commerce API",
+		"description": "API collection for Shoes E-commerce platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26044730",
+		"_collection_link": "https://winter-flare-727325.postman.co/workspace/Other-Use~56ea97a3-e6f6-4d1c-8cdb-07ff53d831ec/collection/26044730-fe74d140-216a-4499-95ec-48ba3078c9e6?action=share&source=collection_link&creator=26044730"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \n    \"firstName\": \"Furkan\",\n    \"lastName\": \"Evin\",\n    \"email\": \"user2@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.accessToken) {",
+									"    pm.environment.set('access_token', jsonData.accessToken);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login with user credentials"
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/refresh",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						},
+						"description": "Get new access token using refresh token"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						},
+						"description": "Logout user and clear refresh token"
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \n    \"firstName\": \"Furkan\",\n    \"lastName\": \"Evin\",\n    \"email\": \"user1@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shoes",
+			"item": [
+				{
+					"name": "Get All Shoes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/shoes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"shoes"
+							]
+						},
+						"description": "Get all shoes (protected route)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Shoe",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/shoes/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"shoes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "shoe_id_here"
+								}
+							]
+						},
+						"description": "Get a single shoe by ID (protected route)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Shoe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New Shoe Model\",\n    \"picture\": [\"/view-1.png\", \"/view-2.png\"],\n    \"description\": \"New shoe description\",\n    \"isNew\": true,\n    \"size\": \"42,43,44\",\n    \"color\": \"black,white\",\n    \"gender\": \"men\",\n    \"price\": 199.99\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/shoes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"shoes"
+							]
+						},
+						"description": "Create a new shoe (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Shoe",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Shoe Name\",\n    \"price\": 249.99\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/shoes/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"shoes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "shoe_id_here"
+								}
+							]
+						},
+						"description": "Update a shoe by ID (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Shoe",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/shoes/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"shoes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "shoe_id_here"
+								}
+							]
+						},
+						"description": "Delete a shoe by ID (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Shoes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gender\": \"men\",\n    \"color\": \"black\",\n    \"size\": \"42\",\n    \"minPrice\": 100,\n    \"maxPrice\": 300\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/shoes/search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"shoes",
+								"search"
+							]
+						},
+						"description": "Search shoes with filters (protected route)"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
